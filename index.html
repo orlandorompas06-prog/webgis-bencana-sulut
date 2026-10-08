@@ -1,0 +1,949 @@
+<title>Riwayat Bencana Sulut</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Leaflet 1.9.4 (BSD-2) — inlined because the artifact frame only admits scripts from CDNs */
+/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: url(images/layers.png);
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: url(images/layers-2x.png);
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: url(images/marker-icon.png);
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+
+</style>
+<style>
+/* Layout: an operations-room console — map as the main pane, a narrow ledger of numbers beside it. */
+:root {
+  --bg: #F3F4F9;
+  --panel: #FFFFFF;
+  --ink: #1C1E33;
+  --muted: #5D6182;
+  --line: #DADDEC;
+  --sea: #DCE7F3;
+  --land-edge: #FFFFFF;
+  --c0: #EEF0F7;
+  --c1: #B9C2E6;
+  --c2: #7783C6;
+  --c3: #43378F;
+  --accent: #43378F;
+  --focus: #2E7FD8;
+  --font-ui: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --font-num: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12131F; --panel: #1B1D2D; --ink: #E7E8F4; --muted: #A1A5C4; --line: #2E3149;
+    --sea: #172235; --land-edge: #12131F; --c0: #2A2D44; --c1: #4A5596; --c2: #7C86D4; --c3: #B9B3F5;
+    --accent: #A79FF0; --focus: #6FB1FF; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12131F; --panel: #1B1D2D; --ink: #E7E8F4; --muted: #A1A5C4; --line: #2E3149;
+  --sea: #172235; --land-edge: #12131F; --c0: #2A2D44; --c1: #4A5596; --c2: #7C86D4; --c3: #B9B3F5;
+  --accent: #A79FF0; --focus: #6FB1FF; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 14px; line-height: 1.5; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 16px; padding-block: 18px 28px; display: grid; gap: 14px; }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 10px 24px; }
+.eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1 { margin: 2px 0 0; font-size: clamp(20px, 2.6vw, 28px); line-height: 1.15; font-weight: 700; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; max-width: 62ch; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--panel); }
+.seg button { font: inherit; font-weight: 600; font-size: 13px; padding: 7px 12px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--panel); }
+.yearbox { display: flex; align-items: center; gap: 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; }
+.yearbox input { width: 170px; accent-color: var(--accent); }
+.yearbox output { font-family: var(--font-num); font-weight: 600; min-width: 4ch; }
+button:focus-visible, input:focus-visible, .rank button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.main { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 14px; align-items: start; }
+@media (max-width: 900px) { .main { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; min-width: 0; }
+.card h2 { margin: 0 0 10px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+#map { height: min(72vh, 640px); min-height: 380px; border-radius: 10px; border: 1px solid var(--line); background: var(--sea); }
+.leaflet-container { background: var(--sea); font-family: var(--font-ui); }
+.leaflet-tooltip { background: var(--panel); color: var(--ink); border: 1px solid var(--line); box-shadow: none; font-family: var(--font-ui); }
+.leaflet-tooltip-top:before { border-top-color: var(--line); }
+.leaflet-control-zoom a { background: var(--panel); color: var(--ink); border-color: var(--line) !important; }
+.mapwrap { position: relative; min-width: 0; }
+.legend { position: absolute; left: 12px; bottom: 12px; z-index: 500; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 12px; display: grid; gap: 5px; }
+.legend b { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.legend span { display: flex; align-items: center; gap: 8px; }
+.legend i { width: 18px; height: 12px; border-radius: 2px; border: 1px solid var(--line); display: inline-block; }
+.north { position: absolute; right: 12px; top: 12px; z-index: 500; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 4px 9px; font-weight: 700; font-family: var(--font-num); font-size: 12px; text-align: center; line-height: 1.1; }
+
+.side { display: grid; gap: 14px; min-width: 0; }
+.detail .name { font-size: 18px; font-weight: 700; line-height: 1.2; }
+.detail .meta { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+.kpi { border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+.kpi small { display: block; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.kpi strong { font-family: var(--font-num); font-size: 20px; font-variant-numeric: tabular-nums; }
+.pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 99px; color: var(--panel); }
+svg text { fill: var(--muted); font-family: var(--font-num); }
+.rank { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; max-height: 320px; overflow-y: auto; }
+.rank button { width: 100%; display: grid; grid-template-columns: 22px minmax(0,1fr) 34px 70px; align-items: center; gap: 8px; font: inherit; color: var(--ink); background: transparent; border: 0; border-radius: 6px; padding: 5px 6px; cursor: pointer; text-align: left; }
+.rank button:hover, .rank button[aria-current="true"] { background: var(--c0); }
+.rank .n { font-family: var(--font-num); color: var(--muted); font-size: 12px; }
+.rank .v { font-family: var(--font-num); font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+.rank .bar { height: 7px; border-radius: 4px; background: var(--c2); }
+.row2 { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; }
+@media (max-width: 900px) { .row2 { grid-template-columns: minmax(0, 1fr); } }
+.chartbox { overflow-x: auto; }
+.types { display: grid; gap: 6px; }
+.types div { display: grid; grid-template-columns: 120px minmax(0,1fr) 30px; gap: 8px; align-items: center; font-size: 13px; }
+.types .t { height: 10px; border-radius: 3px; background: var(--c3); }
+.types .v { font-family: var(--font-num); text-align: right; }
+.impact { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px; }
+.note { color: var(--muted); font-size: 12px; margin: 10px 0 0; }
+footer { color: var(--muted); font-size: 12px; }
+footer a { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">WebGIS · Provinsi Sulawesi Utara</div>
+      <h1>Riwayat Kejadian Bencana 2015–2025</h1>
+      <p class="sub">Jumlah kejadian bencana per kabupaten/kota yang tercatat BNPB. Pilih tahun atau klik wilayah untuk melihat rinciannya.</p>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Mode tampilan">
+        <button id="btnTotal" type="button" aria-pressed="true">Total 2015–2024</button>
+        <button id="btnYear" type="button" aria-pressed="false">Per tahun</button>
+      </div>
+      <label class="yearbox" for="year">Tahun
+        <input id="year" type="range" min="2015" max="2024" step="1" value="2021">
+        <output id="yearOut" for="year">2021</output>
+      </label>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="mapwrap">
+      <div id="map" role="region" aria-label="Peta jumlah kejadian bencana"></div>
+      <div class="legend" id="legend"></div>
+      <div class="north" aria-hidden="true">▲<br>U</div>
+    </div>
+    <div class="side">
+      <section class="card detail" aria-live="polite">
+        <h2>Detail wilayah</h2>
+        <div id="detail"></div>
+      </section>
+      <section class="card">
+        <h2 id="rankTitle">Peringkat wilayah</h2>
+        <ul class="rank" id="rank"></ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="row2">
+    <section class="card">
+      <h2>Jumlah kejadian per tahun, Sulawesi Utara</h2>
+      <div class="chartbox" id="trend"></div>
+      <p class="note">Batang 2015–2024 adalah jumlah dari 15 kabupaten/kota. Batang 2025 memakai angka tingkat provinsi karena BNPB belum merilis rincian kabupaten/kota untuk tahun 2025.</p>
+    </section>
+    <section class="card">
+      <h2>Tahun 2025 menurut jenis bencana</h2>
+      <div class="types" id="types"></div>
+      <div class="impact" id="impact"></div>
+    </section>
+  </div>
+
+  <footer>
+    Sumber: Satu Data BNPB — Jumlah Kejadian Bencana Menurut Kabupaten Tahun 2010–2024 dan Kompilasi Data Kejadian dan Dampak Bencana 2025 (<a href="https://data.bnpb.go.id/dataset/data-bencana-indonesia" target="_blank" rel="noopener">data.bnpb.go.id</a>). Batas wilayah: kode wilayah BPS, WGS 84. Kelas peta total memakai interval sama.
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+const GEO = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{"nama":"Kabupaten Bolaang Mongondow","singkat":"Bolmong","kode_bps":"7101","kode_bnpb":"7101","total":36,"y2015":3,"y2016":2,"y2017":2,"y2018":4,"y2019":3,"y2020":3,"y2021":7,"y2022":3,"y2023":5,"y2024":4},"geometry":{"type":"MultiPolygon","coordinates":[[[[123.7909,0.8789],[123.7876,0.8766],[123.7876,0.88],[123.7909,0.8789]]],[[[124.2982,1.0072],[124.2975,1.003],[124.3043,1.0012],[124.3055,1.0056],[124.3168,1.0081],[124.3315,0.9897],[124.3558,0.9868],[124.3573,0.9763],[124.3629,0.9738],[124.3622,0.9629],[124.3705,0.9637],[124.3719,0.9574],[124.3758,0.9575],[124.3678,0.9226],[124.3789,0.9079],[124.379,0.8702],[124.3916,0.8619],[124.407,0.8591],[124.4068,0.8517],[124.434,0.8331],[124.4365,0.826],[124.4326,0.8166],[124.4201,0.8126],[124.4191,0.8049],[124.4276,0.8026],[124.4337,0.7925],[124.4231,0.7857],[124.417,0.7692],[124.3987,0.7689],[124.3484,0.7543],[124.3448,0.7552],[124.3472,0.7663],[124.3219,0.7697],[124.3075,0.7614],[124.3093,0.7559],[124.2877,0.75],[124.2745,0.7406],[124.2781,0.7314],[124.2737,0.7315],[124.2715,0.7118],[124.2871,0.7042],[124.2951,0.6979],[124.2937,0.6943],[124.3248,0.704],[124.3326,0.7136],[124.349,0.7086],[124.3605,0.6826],[124.3601,0.6767],[124.3422,0.6604],[124.3353,0.6257],[124.3376,0.6169],[124.3201,0.583],[124.3016,0.5729],[124.298,0.5621],[124.2829,0.5558],[124.274,0.5444],[124.2219,0.5398],[124.1946,0.5276],[124.1777,0.5259],[124.1809,0.5392],[124.1606,0.5617],[124.1387,0.5582],[124.1306,0.5447],[124.1158,0.5364],[124.1131,0.5273],[124.0742,0.5139],[124.0629,0.5185],[124.0493,0.5117],[124.0465,0.4978],[124.0329,0.4925],[124.0326,0.4873],[124.0235,0.483],[124.0242,0.4769],[124.0017,0.4669],[123.9923,0.468],[123.9903,0.4634],[123.9567,0.4589],[123.951,0.4559],[123.9476,0.4425],[123.9393,0.4411],[123.9294,0.4316],[123.9105,0.4341],[123.8948,0.4508],[123.8822,0.4488],[123.8601,0.4591],[123.8394,0.4547],[123.8266,0.4433],[123.7917,0.4406],[123.7801,0.4462],[123.7764,0.4548],[123.767,0.4545],[123.7606,0.4601],[123.75,0.4571],[123.7382,0.4652],[123.7274,0.4614],[123.7135,0.4667],[123.7074,0.4563],[123.6986,0.456],[123.6912,0.4745],[123.6918,0.4866],[123.7107,0.5036],[123.7212,0.5259],[123.7136,0.5475],[123.7144,0.5624],[123.7096,0.5706],[123.6825,0.5627],[123.6437,0.5735],[123.6343,0.588],[123.634,0.598],[123.6427,0.608],[123.6664,0.6171],[123.6781,0.6108],[123.7006,0.614],[123.7171,0.6358],[123.7257,0.6379],[123.7314,0.6542],[123.7292,0.663],[123.7401,0.6776],[123.7402,0.6853],[123.7292,0.6951],[123.7285,0.7087],[123.7222,0.713],[123.7183,0.7252],[123.7003,0.7318],[123.7102,0.7594],[123.7024,0.7624],[123.6837,0.8106],[123.676,0.8188],[123.6851,0.8263],[123.6908,0.8598],[123.707,0.8584],[123.7073,0.8719],[123.7132,0.874],[123.7182,0.867],[123.7367,0.8645],[123.7371,0.8492],[123.7432,0.8501],[123.741,0.8422],[123.7452,0.8423],[123.7525,0.8307],[123.7629,0.8348],[123.7567,0.8549],[123.7694,0.8375],[123.776,0.8401],[123.7881,0.8299],[123.8041,0.8375],[123.7916,0.8555],[123.8187,0.842],[123.8253,0.8446],[123.8271,0.8405],[123.8499,0.8448],[123.858,0.8401],[123.8801,0.8389],[123.9144,0.8505],[123.9291,0.8399],[123.9339,0.8413],[123.9349,0.8356],[123.9593,0.8371],[123.9629,0.8447],[123.953,0.8458],[123.9527,0.8508],[123.9435,0.8459],[123.9413,0.855],[123.9295,0.858],[123.9565,0.8648],[123.9742,0.8768],[124.032,0.8984],[124.0716,0.9215],[124.1119,0.9207],[124.1366,0.9279],[124.1757,0.9577],[124.1812,0.9728],[124.2032,0.9897],[124.21,0.9876],[124.2156,0.9929],[124.2283,0.9898],[124.2434,0.9995],[124.2763,0.9991],[124.2982,1.0072]]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Minahasa","singkat":"Minahasa","kode_bps":"7102","kode_bnpb":"7102","total":33,"y2015":0,"y2016":1,"y2017":3,"y2018":5,"y2019":7,"y2020":0,"y2021":6,"y2022":1,"y2023":4,"y2024":6},"geometry":{"type":"Polygon","coordinates":[[[124.8916,1.4584],[124.9072,1.4568],[124.9149,1.4433],[124.9207,1.3971],[124.9315,1.376],[124.9225,1.3505],[124.9351,1.3467],[124.9384,1.3392],[124.9556,1.3283],[124.9634,1.3132],[124.9689,1.3109],[124.9699,1.3025],[124.9734,1.299],[124.997,1.3281],[125.0094,1.3164],[125.0254,1.2883],[125.0542,1.29],[125.0635,1.285],[125.023,1.1416],[124.9718,1.0744],[124.9081,1.0175],[124.8759,1.0537],[124.8739,1.0701],[124.8654,1.0756],[124.8381,1.1208],[124.824,1.113],[124.8156,1.1171],[124.7979,1.1154],[124.7699,1.0964],[124.7585,1.0983],[124.7366,1.115],[124.7442,1.143],[124.7332,1.1786],[124.7257,1.1876],[124.7399,1.1945],[124.7422,1.2194],[124.7553,1.2376],[124.7591,1.2521],[124.7311,1.2583],[124.7048,1.2867],[124.7048,1.2923],[124.7252,1.3033],[124.7177,1.3255],[124.701,1.3307],[124.6729,1.3312],[124.6581,1.3374],[124.6224,1.3361],[124.602,1.3516],[124.5825,1.3572],[124.5648,1.3783],[124.568,1.3841],[124.576,1.3857],[124.5741,1.3907],[124.5809,1.3983],[124.5893,1.3954],[124.603,1.4014],[124.6088,1.4153],[124.6183,1.4188],[124.6275,1.4154],[124.6395,1.3995],[124.6576,1.3944],[124.6799,1.3964],[124.6851,1.4068],[124.703,1.4084],[124.708,1.4194],[124.7412,1.4366],[124.7449,1.4491],[124.7723,1.4608],[124.7843,1.4612],[124.787,1.4438],[124.8258,1.4294],[124.8507,1.4401],[124.8612,1.4367],[124.8612,1.4461],[124.87,1.451],[124.8728,1.4656],[124.8834,1.4618],[124.8852,1.4542],[124.8916,1.4584]],[[124.8255,1.4043],[124.8116,1.3973],[124.8109,1.3722],[124.8029,1.3592],[124.7962,1.3567],[124.7875,1.3656],[124.7776,1.3617],[124.7702,1.3679],[124.7688,1.3546],[124.7437,1.3324],[124.7404,1.3136],[124.7484,1.2829],[124.7571,1.2789],[124.7682,1.2897],[124.7822,1.2883],[124.7955,1.2819],[124.8034,1.2718],[124.8141,1.27],[124.8288,1.2538],[124.8542,1.2643],[124.8592,1.2895],[124.8557,1.2944],[124.8688,1.3027],[124.874,1.323],[124.8929,1.3517],[124.8881,1.3582],[124.8632,1.3526],[124.8609,1.3615],[124.8382,1.3812],[124.8408,1.4016],[124.8255,1.4043]],[[124.9029,1.2708],[124.8967,1.2435],[124.8912,1.2447],[124.8882,1.2385],[124.8676,1.2331],[124.8573,1.2115],[124.8585,1.2023],[124.8832,1.1878],[124.8896,1.1696],[124.8989,1.1745],[124.9037,1.1839],[124.9101,1.2249],[124.9281,1.2398],[124.9338,1.2635],[124.93,1.2759],[124.9138,1.2855],[124.9029,1.2708]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Kepulauan Sangihe","singkat":"Sangihe","kode_bps":"7103","kode_bnpb":"7103","total":17,"y2015":2,"y2016":2,"y2017":8,"y2018":0,"y2019":1,"y2020":1,"y2021":1,"y2022":0,"y2023":1,"y2024":1},"geometry":{"type":"MultiPolygon","coordinates":[[[[125.4856,3.0628],[125.4893,3.0611],[125.4879,3.0597],[125.4856,3.0628]]],[[[125.5031,3.0925],[125.5105,3.0788],[125.5058,3.0597],[125.5001,3.0629],[125.5011,3.0772],[125.495,3.0803],[125.5031,3.0925]]],[[[125.4844,3.0963],[125.4807,3.0917],[125.478,3.0919],[125.4776,3.0949],[125.4844,3.0963]]],[[[125.4927,3.0984],[125.4964,3.0917],[125.4876,3.0956],[125.4927,3.0984]]],[[[125.4469,3.143],[125.4555,3.1475],[125.457,3.1403],[125.4469,3.143]]],[[[125.5266,3.1913],[125.5378,3.1796],[125.5378,3.169],[125.5334,3.1601],[125.524,3.1634],[125.5254,3.1586],[125.5162,3.1558],[125.5085,3.1602],[125.5106,3.1644],[125.5052,3.1622],[125.5059,3.1693],[125.5002,3.1687],[125.4996,3.1728],[125.5159,3.1707],[125.5037,3.181],[125.5128,3.1889],[125.5186,3.1723],[125.525,3.1741],[125.5271,3.1796],[125.5212,3.1913],[125.5266,3.1913]]],[[[125.4605,3.255],[125.4726,3.2441],[125.4686,3.2367],[125.4565,3.2321],[125.448,3.2391],[125.4475,3.2497],[125.4605,3.255]]],[[[125.5803,3.3426],[125.5705,3.3321],[125.5674,3.3332],[125.566,3.3375],[125.5803,3.3426]]],[[[125.608,3.3652],[125.6214,3.3636],[125.62,3.3523],[125.6155,3.342],[125.6065,3.3411],[125.6055,3.3597],[125.608,3.3652]]],[[[125.6439,3.3799],[125.644,3.3733],[125.6356,3.3733],[125.6385,3.3786],[125.6439,3.3799]]],[[[125.5638,3.4169],[125.5797,3.3979],[125.576,3.389],[125.5723,3.3979],[125.5564,3.3938],[125.5638,3.4169]]],[[[125.7114,3.475],[125.7103,3.4651],[125.7035,3.4517],[125.6917,3.4639],[125.7114,3.475]]],[[[125.7272,3.4807],[125.736,3.4804],[125.73,3.4756],[125.7272,3.4807]]],[[[125.6565,3.5361],[125.6632,3.5326],[125.6563,3.5274],[125.6541,3.5312],[125.6565,3.5361]]],[[[125.6429,3.5524],[125.6457,3.5442],[125.6361,3.5376],[125.6337,3.5518],[125.6429,3.5524]]],[[[125.4533,3.7356],[125.49,3.7294],[125.509,3.7211],[125.5575,3.6652],[125.5614,3.648],[125.5694,3.6492],[125.5749,3.6424],[125.5755,3.636],[125.5634,3.6316],[125.5637,3.6268],[125.5833,3.6253],[125.5881,3.6125],[125.5863,3.6077],[125.5749,3.6058],[125.5789,3.5977],[125.5701,3.5876],[125.5624,3.5889],[125.5595,3.5778],[125.5816,3.5804],[125.5876,3.5741],[125.5905,3.5522],[125.6005,3.5585],[125.6108,3.5407],[125.6181,3.5412],[125.6179,3.5269],[125.6237,3.5286],[125.6222,3.5208],[125.6317,3.5147],[125.6417,3.491],[125.6554,3.4936],[125.6611,3.4859],[125.6574,3.4952],[125.6438,3.4972],[125.6421,3.5119],[125.6448,3.5186],[125.649,3.5123],[125.6623,3.5232],[125.6552,3.5147],[125.6546,3.5048],[125.6668,3.5034],[125.6713,3.4928],[125.6712,3.4804],[125.6645,3.4724],[125.6764,3.429],[125.6708,3.4172],[125.6634,3.4141],[125.6625,3.401],[125.6551,3.402],[125.6576,3.3885],[125.6527,3.3913],[125.6381,3.3793],[125.6353,3.3893],[125.6314,3.389],[125.6305,3.3803],[125.6217,3.3884],[125.618,3.3811],[125.622,3.3725],[125.6182,3.3711],[125.6056,3.3708],[125.5951,3.3799],[125.5811,3.3758],[125.5917,3.3832],[125.5861,3.4045],[125.5748,3.4157],[125.5583,3.4216],[125.5692,3.4373],[125.5521,3.4322],[125.5495,3.4352],[125.5474,3.426],[125.5515,3.4192],[125.5447,3.41],[125.5384,3.417],[125.5341,3.4125],[125.5227,3.413],[125.5195,3.4245],[125.5254,3.4326],[125.5238,3.4385],[125.5117,3.44],[125.5047,3.4351],[125.5012,3.4391],[125.5011,3.4538],[125.4945,3.4608],[125.4987,3.4676],[125.4863,3.4674],[125.4899,3.4764],[125.481,3.4816],[125.4873,3.4965],[125.49,3.5212],[125.4868,3.5253],[125.5124,3.5653],[125.508,3.5732],[125.5013,3.5726],[125.5007,3.5781],[125.4936,3.5784],[125.4913,3.5727],[125.4824,3.5926],[125.4896,3.5987],[125.5034,3.6007],[125.5039,3.6054],[125.5003,3.6099],[125.4804,3.605],[125.4423,3.6205],[125.4137,3.6439],[125.3976,3.6732],[125.3981,3.7042],[125.404,3.7189],[125.4273,3.7344],[125.4533,3.7356]]],[[[125.567,3.7693],[125.5793,3.7673],[125.583,3.7526],[125.5751,3.7557],[125.5665,3.7489],[125.562,3.7536],[125.5568,3.7458],[125.555,3.7536],[125.567,3.7693]]],[[[125.588,3.7871],[125.6232,3.793],[125.6342,3.7837],[125.618,3.7818],[125.6131,3.79],[125.606,3.7878],[125.6011,3.7763],[125.5906,3.769],[125.588,3.7871]]],[[[125.5669,3.7978],[125.565,3.7944],[125.5654,3.7981],[125.5669,3.7978]]],[[[125.3907,3.913],[125.3911,3.9078],[125.3849,3.9091],[125.3841,3.9121],[125.3907,3.913]]],[[[125.3201,4.2368],[125.331,4.2344],[125.3297,4.2271],[125.3179,4.2322],[125.3201,4.2368]]],[[[125.6883,4.4374],[125.6964,4.4326],[125.6893,4.432],[125.6883,4.4374]]],[[[125.6297,4.5915],[125.6318,4.5893],[125.6261,4.589],[125.6297,4.5915]]],[[[125.4382,4.6514],[125.4338,4.6505],[125.4353,4.6627],[125.4381,4.6582],[125.4382,4.6514]]],[[[125.4912,4.745],[125.4892,4.7355],[125.4773,4.7295],[125.4777,4.7363],[125.4912,4.745]]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Kepulauan Talaud","singkat":"Talaud","kode_bps":"7104","kode_bnpb":"7104","total":13,"y2015":1,"y2016":0,"y2017":0,"y2018":0,"y2019":0,"y2020":4,"y2021":4,"y2022":2,"y2023":1,"y2024":1},"geometry":{"type":"MultiPolygon","coordinates":[[[[126.7806,3.8409],[126.8031,3.8341],[126.8185,3.8086],[126.8349,3.7939],[126.8507,3.7579],[126.842,3.7404],[126.8357,3.7426],[126.8247,3.7286],[126.8094,3.7404],[126.7837,3.7476],[126.7676,3.7657],[126.765,3.7778],[126.7542,3.7861],[126.7449,3.8117],[126.7439,3.8429],[126.7525,3.8527],[126.762,3.8545],[126.7806,3.8409]]],[[[126.7088,3.944],[126.7175,3.9452],[126.7148,3.9387],[126.7088,3.944]]],[[[126.7125,3.9529],[126.7075,3.9543],[126.7134,3.9551],[126.7125,3.9529]]],[[[126.618,4.0435],[126.6407,4.0233],[126.642,3.9904],[126.6472,3.9767],[126.6647,3.959],[126.7149,3.9261],[126.7219,3.9142],[126.7226,3.8986],[126.7164,3.8874],[126.6921,3.8679],[126.6853,3.8694],[126.7062,3.8188],[126.701,3.8117],[126.6932,3.8097],[126.6811,3.8146],[126.6848,3.8205],[126.6752,3.8357],[126.6765,3.8548],[126.6635,3.8751],[126.6643,3.9075],[126.6699,3.9166],[126.6673,3.9316],[126.6571,3.9398],[126.6506,3.9359],[126.6377,3.9508],[126.6367,3.9698],[126.6266,3.9849],[126.6134,3.9842],[126.6213,3.9923],[126.6121,4.0014],[126.6176,4.0208],[126.6163,4.0301],[126.6083,4.0395],[126.618,4.0435]]],[[[126.744,4.5457],[126.7751,4.5389],[126.7762,4.5283],[126.785,4.5248],[126.7945,4.5322],[126.8084,4.5333],[126.8101,4.5256],[126.8158,4.5238],[126.8166,4.5115],[126.8287,4.5046],[126.8336,4.4893],[126.8556,4.4893],[126.8536,4.4656],[126.8684,4.4559],[126.8698,4.4309],[126.8515,4.4113],[126.8504,4.3754],[126.866,4.3435],[126.8997,4.3018],[126.9127,4.2704],[126.8613,4.2503],[126.8603,4.2379],[126.8715,4.2258],[126.8696,4.215],[126.8574,4.2025],[126.827,4.1852],[126.7975,4.1492],[126.7966,4.1375],[126.8048,4.1243],[126.8034,4.1113],[126.8121,4.1049],[126.8016,4.0552],[126.8025,4.0413],[126.8092,4.0337],[126.8063,4.0299],[126.7946,4.0316],[126.7914,4.0171],[126.7847,4.0171],[126.78,4.0065],[126.7746,4.0092],[126.7718,4.0011],[126.7616,3.9943],[126.7438,3.9926],[126.7016,4.0045],[126.685,3.9925],[126.6711,4.0025],[126.6662,4.0298],[126.6688,4.0443],[126.6865,4.0741],[126.6966,4.0761],[126.7053,4.0859],[126.7129,4.0846],[126.7215,4.0933],[126.7219,4.101],[126.7333,4.1087],[126.7368,4.126],[126.7502,4.1421],[126.7495,4.1535],[126.76,4.1816],[126.7912,4.2138],[126.7884,4.2263],[126.7934,4.235],[126.7813,4.2488],[126.7577,4.2478],[126.7471,4.2631],[126.7327,4.2672],[126.7165,4.2653],[126.7102,4.2746],[126.7155,4.3026],[126.7077,4.3073],[126.7081,4.3215],[126.6992,4.3293],[126.6874,4.328],[126.6802,4.3345],[126.6841,4.3528],[126.6897,4.3588],[126.6854,4.3678],[126.6876,4.3752],[126.6993,4.3821],[126.698,4.3928],[126.693,4.3927],[126.696,4.4016],[126.7029,4.4055],[126.6993,4.4113],[126.7058,4.4221],[126.7034,4.4288],[126.7105,4.4276],[126.7165,4.4343],[126.7146,4.452],[126.7183,4.4564],[126.7229,4.4516],[126.734,4.4617],[126.7289,4.4752],[126.7222,4.4761],[126.7289,4.4878],[126.7213,4.4938],[126.7203,4.51],[126.7314,4.5346],[126.744,4.5457]]],[[[127.1498,4.6162],[127.1394,4.6074],[127.1187,4.6164],[127.1316,4.6123],[127.1466,4.6188],[127.1498,4.6162]]],[[[127.1578,4.6325],[127.1624,4.6232],[127.1582,4.6218],[127.1578,4.6325]]],[[[127.1613,4.6434],[127.1585,4.6385],[127.155,4.6406],[127.1556,4.6438],[127.1613,4.6434]]],[[[127.1401,4.7049],[127.1443,4.7008],[127.1409,4.6871],[127.1311,4.6968],[127.1401,4.7049]]],[[[127.0647,4.7414],[127.0797,4.7393],[127.0926,4.7331],[127.0931,4.7284],[127.0839,4.7181],[127.0684,4.7185],[127.054,4.7315],[127.0647,4.7414]]],[[[127.1329,4.7318],[127.1145,4.7319],[127.1104,4.7464],[127.1166,4.7631],[127.133,4.7784],[127.1417,4.7694],[127.1461,4.7533],[127.1407,4.7367],[127.1329,4.7318]]],[[[127.0625,4.8073],[127.0648,4.794],[127.0577,4.7909],[127.0563,4.7978],[127.0625,4.8073]]],[[[126.5884,5.5642],[126.5894,5.5549],[126.5796,5.5449],[126.577,5.5576],[126.5821,5.5654],[126.5884,5.5642]]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Minahasa Selatan","singkat":"Minsel","kode_bps":"7105","kode_bnpb":"7105","total":20,"y2015":2,"y2016":1,"y2017":2,"y2018":3,"y2019":0,"y2020":1,"y2021":2,"y2022":8,"y2023":0,"y2024":1},"geometry":{"type":"MultiPolygon","coordinates":[[[[124.5113,1.2983],[124.5034,1.3016],[124.5089,1.3056],[124.5113,1.2983]]],[[[124.7366,1.115],[124.7255,1.1097],[124.7024,1.11],[124.6802,1.1003],[124.6325,1.0973],[124.6255,1.101],[124.6029,1.094],[124.5875,1.0836],[124.5804,1.0881],[124.5776,1.1068],[124.5734,1.0945],[124.5624,1.0957],[124.5501,1.0889],[124.5556,1.0572],[124.5664,1.0444],[124.5543,1.0401],[124.5551,1.0312],[124.5666,1.0117],[124.5791,1.007],[124.5728,0.9963],[124.5756,0.9851],[124.5716,0.9763],[124.581,0.9389],[124.5795,0.9225],[124.5584,0.887],[124.5601,0.8675],[124.5486,0.8537],[124.5346,0.8472],[124.5342,0.8424],[124.5257,0.8412],[124.517,0.8257],[124.4971,0.8206],[124.4972,0.8124],[124.4879,0.802],[124.4924,0.7852],[124.4865,0.7646],[124.4812,0.7633],[124.4787,0.7687],[124.4695,0.7633],[124.4625,0.7734],[124.453,0.7701],[124.4468,0.7729],[124.4322,0.7973],[124.4191,0.8049],[124.4201,0.8126],[124.4287,0.8137],[124.4351,0.8213],[124.434,0.8331],[124.4068,0.8517],[124.407,0.8591],[124.3916,0.8619],[124.379,0.8702],[124.3789,0.9079],[124.3678,0.9226],[124.3758,0.9575],[124.3719,0.9574],[124.3705,0.9637],[124.3622,0.9629],[124.3629,0.9738],[124.3573,0.9763],[124.3558,0.9868],[124.3315,0.9897],[124.3168,1.0081],[124.3055,1.0056],[124.3043,1.0012],[124.2975,1.003],[124.2981,1.0133],[124.3074,1.0232],[124.3038,1.0295],[124.3158,1.0473],[124.3133,1.0526],[124.3221,1.0687],[124.3207,1.0777],[124.3285,1.0795],[124.3393,1.0989],[124.3405,1.1211],[124.3565,1.1337],[124.3419,1.1551],[124.3487,1.1622],[124.3852,1.1809],[124.393,1.179],[124.4056,1.1852],[124.4154,1.1957],[124.4288,1.1887],[124.4656,1.1897],[124.4889,1.1848],[124.4979,1.1918],[124.5188,1.1899],[124.5187,1.2106],[124.5279,1.2153],[124.5484,1.2088],[124.5625,1.182],[124.5811,1.1926],[124.5979,1.2209],[124.61,1.2322],[124.6106,1.255],[124.59,1.2677],[124.5734,1.2706],[124.57,1.2816],[124.5634,1.2724],[124.55,1.2716],[124.5158,1.3001],[124.5124,1.3158],[124.5175,1.3272],[124.5292,1.3369],[124.5317,1.3525],[124.5562,1.3785],[124.5648,1.3783],[124.5825,1.3572],[124.602,1.3516],[124.6224,1.3361],[124.6581,1.3374],[124.6729,1.3312],[124.701,1.3307],[124.7177,1.3255],[124.7252,1.3033],[124.7048,1.2923],[124.7048,1.2867],[124.7311,1.2583],[124.7591,1.2521],[124.7553,1.2376],[124.7422,1.2194],[124.7399,1.1945],[124.7257,1.1876],[124.7332,1.1786],[124.7442,1.143],[124.7366,1.115]]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Minahasa Utara","singkat":"Minut","kode_bps":"7106","kode_bnpb":"7106","total":16,"y2015":2,"y2016":0,"y2017":0,"y2018":2,"y2019":0,"y2020":0,"y2021":5,"y2022":0,"y2023":6,"y2024":1},"geometry":{"type":"MultiPolygon","coordinates":[[[[125.0281,1.7062],[125.0316,1.698],[125.0302,1.6894],[125.0179,1.6933],[125.0166,1.6981],[125.0207,1.7055],[125.0281,1.7062]]],[[[124.96,1.7081],[124.9515,1.715],[124.9531,1.7202],[124.9559,1.7138],[124.96,1.7081]]],[[[124.7667,1.7446],[124.7801,1.697],[124.7648,1.6928],[124.7334,1.7144],[124.7314,1.728],[124.7393,1.7329],[124.7491,1.7211],[124.7518,1.7346],[124.7667,1.7446]]],[[[125.1569,1.7457],[125.1595,1.7426],[125.157,1.741],[125.1534,1.7427],[125.1569,1.7457]]],[[[124.7482,1.7508],[124.751,1.7459],[124.7464,1.7475],[124.7482,1.7508]]],[[[125.0214,1.7216],[125.0139,1.69],[125.031,1.6813],[125.0392,1.6803],[125.0463,1.6853],[125.0674,1.6713],[125.0785,1.6786],[125.0906,1.6766],[125.1114,1.6639],[125.1191,1.6762],[125.1341,1.6678],[125.1441,1.688],[125.154,1.68],[125.1671,1.6885],[125.1757,1.6841],[125.176,1.6739],[125.1634,1.6633],[125.165,1.6445],[125.1506,1.6344],[125.1522,1.6241],[125.1432,1.6222],[125.1433,1.607],[125.1551,1.5957],[125.1466,1.5893],[125.141,1.5688],[125.125,1.558],[125.1122,1.5607],[125.0841,1.5399],[125.0717,1.5364],[125.0756,1.527],[125.0835,1.5246],[125.0829,1.5123],[125.0494,1.4798],[125.0307,1.4536],[125.0481,1.4526],[125.0655,1.4449],[125.0789,1.4501],[125.0921,1.4472],[125.0923,1.4225],[125.1045,1.3968],[125.1,1.3825],[125.0754,1.3615],[125.0752,1.3373],[125.0619,1.3205],[125.0612,1.3109],[125.0662,1.3106],[125.0677,1.3051],[125.063,1.288],[125.0254,1.2883],[125.0094,1.3164],[124.997,1.3281],[124.9734,1.299],[124.9556,1.3283],[124.9384,1.3392],[124.9351,1.3467],[124.9225,1.3505],[124.9315,1.376],[124.9207,1.3971],[124.9149,1.4433],[124.9072,1.4568],[124.8916,1.4584],[124.8905,1.4782],[124.9045,1.4958],[124.9336,1.5092],[124.9228,1.5283],[124.9273,1.5373],[124.9281,1.5644],[124.9242,1.5654],[124.9226,1.5597],[124.911,1.5679],[124.91,1.5736],[124.9026,1.5754],[124.8971,1.5745],[124.8964,1.5689],[124.8782,1.5753],[124.8594,1.5642],[124.8555,1.5709],[124.8452,1.5644],[124.8206,1.5825],[124.8293,1.592],[124.8605,1.6024],[124.868,1.6008],[124.868,1.614],[124.881,1.6306],[124.8963,1.6389],[124.9019,1.6495],[124.9185,1.6632],[124.921,1.6571],[124.9297,1.6622],[124.9239,1.6724],[124.9304,1.6755],[124.9304,1.6842],[124.9406,1.6935],[124.94,1.6862],[124.9612,1.6785],[124.9479,1.6916],[124.9496,1.6983],[124.9511,1.7009],[124.9601,1.6927],[124.958,1.6993],[124.9673,1.6995],[124.9614,1.7263],[124.9663,1.7318],[124.9838,1.7201],[124.9854,1.7264],[124.9799,1.7263],[124.9761,1.7322],[124.9817,1.7388],[124.9814,1.75],[124.9922,1.7516],[125.0053,1.7439],[125.0111,1.73],[125.0148,1.7372],[125.0255,1.7337],[125.0263,1.7234],[125.0214,1.7216]]],[[[124.7397,1.753],[124.7491,1.7386],[124.746,1.729],[124.7345,1.7433],[124.7397,1.753]]],[[[124.766,1.745],[124.7551,1.7458],[124.7581,1.7531],[124.766,1.745]]],[[[125.0577,1.7865],[125.0584,1.7664],[125.0525,1.7596],[125.049,1.7641],[125.0577,1.7865]]],[[[124.7948,1.7943],[124.7984,1.793],[124.7969,1.7756],[124.7896,1.778],[124.7882,1.784],[124.7948,1.7943]]],[[[125.0589,1.7933],[125.0557,1.79],[125.0565,1.795],[125.0589,1.7933]]],[[[125.0969,1.8412],[125.0992,1.8318],[125.0908,1.8368],[125.0969,1.8412]]],[[[125.1348,1.8464],[125.1604,1.8083],[125.1667,1.8026],[125.1802,1.8036],[125.1863,1.7962],[125.1861,1.7752],[125.1755,1.7688],[125.1602,1.7697],[125.1471,1.7576],[125.1474,1.7528],[125.1566,1.749],[125.1488,1.7463],[125.1514,1.7354],[125.1342,1.7485],[125.1309,1.7821],[125.1134,1.8141],[125.1358,1.8222],[125.1243,1.8283],[125.1348,1.8464]]],[[[125.0974,1.8877],[125.0885,1.8579],[125.0876,1.8393],[125.0658,1.8204],[125.0604,1.8067],[125.0509,1.8041],[125.0517,1.8242],[125.0636,1.843],[125.0645,1.8561],[125.074,1.8612],[125.0869,1.8815],[125.0974,1.8877]]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Bolaang Mongondow Utara","singkat":"Bolmut","kode_bps":"7107","kode_bnpb":"7108","total":20,"y2015":0,"y2016":0,"y2017":1,"y2018":0,"y2019":3,"y2020":4,"y2021":6,"y2022":2,"y2023":1,"y2024":3},"geometry":{"type":"MultiPolygon","coordinates":[[[[123.2599,0.9263],[123.263,0.9233],[123.2628,0.9208],[123.2599,0.9206],[123.2599,0.9263]]],[[[123.6967,0.8614],[123.6896,0.858],[123.6851,0.8263],[123.676,0.8188],[123.6837,0.8106],[123.7024,0.7624],[123.7102,0.7594],[123.7003,0.7318],[123.7183,0.7252],[123.7222,0.713],[123.7285,0.7087],[123.7292,0.6951],[123.7402,0.6853],[123.7401,0.6776],[123.7292,0.663],[123.7314,0.6542],[123.7257,0.6379],[123.7171,0.6358],[123.7063,0.6186],[123.6921,0.6112],[123.6781,0.6108],[123.6664,0.6171],[123.6427,0.608],[123.634,0.598],[123.6343,0.588],[123.6437,0.5735],[123.6315,0.5641],[123.6091,0.5619],[123.5878,0.5868],[123.5469,0.5756],[123.5091,0.5844],[123.4878,0.6014],[123.4922,0.6191],[123.4862,0.6265],[123.4282,0.6414],[123.3831,0.6401],[123.3594,0.6514],[123.3422,0.6796],[123.3224,0.6985],[123.2736,0.6982],[123.252,0.7176],[123.2471,0.717],[123.2477,0.7444],[123.2533,0.757],[123.2686,0.7681],[123.2741,0.7867],[123.2675,0.796],[123.2696,0.8037],[123.2529,0.8161],[123.2427,0.8311],[123.233,0.8331],[123.2061,0.8568],[123.2002,0.8556],[123.1919,0.8622],[123.1808,0.8611],[123.1757,0.8684],[123.1613,0.8743],[123.1517,0.871],[123.1489,0.878],[123.1426,0.8765],[123.1267,0.8908],[123.121,0.8899],[123.1135,0.9216],[123.1177,0.9261],[123.1413,0.923],[123.1537,0.9088],[123.1654,0.9021],[123.1783,0.9016],[123.1977,0.9204],[123.1798,0.932],[123.1677,0.9512],[123.1843,0.9538],[123.1963,0.9401],[123.2095,0.9384],[123.215,0.9465],[123.2373,0.9418],[123.2412,0.9438],[123.24,0.9564],[123.251,0.9583],[123.2546,0.953],[123.2525,0.9439],[123.2614,0.9336],[123.2557,0.9309],[123.2542,0.9229],[123.2617,0.9138],[123.2685,0.9242],[123.2709,0.9164],[123.2823,0.912],[123.3184,0.9073],[123.3323,0.9086],[123.3382,0.9146],[123.3433,0.9074],[123.3506,0.92],[123.3509,0.9048],[123.3564,0.9024],[123.3729,0.9129],[123.3945,0.8983],[123.4012,0.9151],[123.4153,0.8916],[123.4256,0.8946],[123.4246,0.9015],[123.4431,0.9042],[123.4737,0.8913],[123.527,0.886],[123.5588,0.8887],[123.5783,0.902],[123.5829,0.8952],[123.5866,0.8979],[123.5811,0.9044],[123.5994,0.9035],[123.6818,0.8751],[123.6967,0.8614]]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Kepulauan Siau Tagulandang Biaro","singkat":"Sitaro","kode_bps":"7108","kode_bnpb":"7109","total":21,"y2015":2,"y2016":2,"y2017":7,"y2018":0,"y2019":1,"y2020":0,"y2021":5,"y2022":2,"y2023":1,"y2024":1},"geometry":{"type":"MultiPolygon","coordinates":[[[[125.3499,2.1182],[125.3525,2.1129],[125.3468,2.1135],[125.3499,2.1182]]],[[[125.4126,2.1257],[125.4066,2.1012],[125.3985,2.1049],[125.3789,2.0908],[125.3657,2.0903],[125.3586,2.0725],[125.3434,2.0716],[125.3362,2.0879],[125.3445,2.1003],[125.347,2.0958],[125.3487,2.1011],[125.3522,2.0995],[125.3536,2.1082],[125.3613,2.1026],[125.3643,2.1056],[125.3533,2.1207],[125.3603,2.1292],[125.3646,2.1286],[125.365,2.1223],[125.3724,2.1244],[125.3911,2.1125],[125.4094,2.1336],[125.4126,2.1257]]],[[[125.3787,2.3266],[125.3864,2.3069],[125.3777,2.2907],[125.3652,2.2865],[125.3439,2.3024],[125.3569,2.3216],[125.3787,2.3266]]],[[[125.3029,2.3644],[125.3066,2.3484],[125.2996,2.3482],[125.2962,2.3617],[125.3029,2.3644]]],[[[125.4035,2.3669],[125.416,2.3678],[125.4214,2.3796],[125.4345,2.3829],[125.4392,2.3738],[125.4581,2.3659],[125.4665,2.3512],[125.4643,2.3431],[125.4571,2.3395],[125.4574,2.3338],[125.4479,2.3277],[125.4435,2.3168],[125.4313,2.3145],[125.4008,2.3226],[125.3866,2.3323],[125.3691,2.3624],[125.3765,2.3752],[125.3913,2.3838],[125.4035,2.3669]]],[[[125.4816,2.6564],[125.4894,2.6532],[125.4882,2.6477],[125.4816,2.6564]]],[[[125.4614,2.6734],[125.4671,2.6543],[125.4748,2.6564],[125.4639,2.6483],[125.4662,2.6408],[125.4444,2.6406],[125.4585,2.6488],[125.4604,2.6555],[125.4491,2.6698],[125.4562,2.6669],[125.4614,2.6734]]],[[[125.4535,2.6761],[125.448,2.6843],[125.463,2.6891],[125.461,2.6794],[125.4535,2.6761]]],[[[125.1811,2.7235],[125.1751,2.7223],[125.1682,2.7369],[125.1776,2.7447],[125.1869,2.7345],[125.1811,2.7235]]],[[[125.4216,2.8097],[125.4455,2.7918],[125.4558,2.7708],[125.4511,2.753],[125.4387,2.7472],[125.4291,2.735],[125.4097,2.7307],[125.4008,2.7115],[125.3927,2.6825],[125.4033,2.6685],[125.422,2.6632],[125.4319,2.6492],[125.4157,2.6332],[125.4059,2.6314],[125.3772,2.6499],[125.361,2.7147],[125.3595,2.7376],[125.3754,2.7973],[125.3926,2.8101],[125.4216,2.8097]]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Minahasa Tenggara","singkat":"Mitra","kode_bps":"7109","kode_bnpb":"7107","total":14,"y2015":1,"y2016":2,"y2017":0,"y2018":2,"y2019":1,"y2020":0,"y2021":4,"y2022":3,"y2023":1,"y2024":0},"geometry":{"type":"MultiPolygon","coordinates":[[[[124.7227,0.853],[124.7354,0.8552],[124.7221,0.8506],[124.7227,0.853]]],[[[124.7638,0.877],[124.7643,0.8735],[124.7625,0.8743],[124.7638,0.877]]],[[[124.7284,0.8806],[124.7346,0.8815],[124.7295,0.8793],[124.7284,0.8806]]],[[[124.7896,0.9254],[124.7917,0.9212],[124.789,0.9189],[124.7896,0.9254]]],[[[124.899,0.9765],[124.9166,0.9769],[124.9159,0.9715],[124.9008,0.9717],[124.899,0.9765]]],[[[124.9081,1.0175],[124.8919,1.003],[124.8947,0.9809],[124.8838,0.985],[124.8828,0.9743],[124.8882,0.9742],[124.884,0.9709],[124.8397,0.9642],[124.7888,0.9442],[124.7821,0.9296],[124.7874,0.9231],[124.7779,0.913],[124.7741,0.9166],[124.7697,0.9139],[124.7707,0.9001],[124.7629,0.8889],[124.7474,0.8963],[124.7338,0.8872],[124.7269,0.8967],[124.7165,0.8963],[124.7068,0.8553],[124.7094,0.847],[124.7204,0.8489],[124.7083,0.8426],[124.7078,0.846],[124.6994,0.844],[124.6946,0.8603],[124.6867,0.8607],[124.6829,0.8726],[124.6711,0.8714],[124.6709,0.8782],[124.6608,0.8902],[124.6586,0.9083],[124.648,0.928],[124.6511,0.9564],[124.6328,0.9477],[124.613,0.9479],[124.5945,0.9414],[124.5871,0.9321],[124.5806,0.9348],[124.5716,0.9763],[124.5756,0.9851],[124.5728,0.9963],[124.5791,1.007],[124.5666,1.0117],[124.5551,1.0312],[124.5543,1.0401],[124.5664,1.0444],[124.5556,1.0572],[124.5501,1.0889],[124.5624,1.0957],[124.5734,1.0945],[124.5776,1.1068],[124.5804,1.0881],[124.5875,1.0836],[124.6029,1.094],[124.6255,1.101],[124.6325,1.0973],[124.6802,1.1003],[124.7024,1.11],[124.7255,1.1097],[124.7366,1.115],[124.7585,1.0983],[124.7699,1.0964],[124.7979,1.1154],[124.8156,1.1171],[124.824,1.113],[124.8381,1.1208],[124.8654,1.0756],[124.8739,1.0701],[124.8759,1.0537],[124.9081,1.0175]]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Bolaang Mongondow Selatan","singkat":"Bolsel","kode_bps":"7110","kode_bnpb":"7111","total":18,"y2015":1,"y2016":1,"y2017":4,"y2018":1,"y2019":0,"y2020":4,"y2021":1,"y2022":2,"y2023":3,"y2024":1},"geometry":{"type":"MultiPolygon","coordinates":[[[[124.362,0.4196],[124.359,0.4295],[124.3608,0.43],[124.3659,0.4227],[124.362,0.4196]]],[[[124.4772,0.4486],[124.4793,0.4462],[124.4764,0.4455],[124.4772,0.4486]]],[[[124.4759,0.466],[124.45,0.466],[124.4488,0.4563],[124.4574,0.4509],[124.4532,0.4454],[124.4414,0.4483],[124.4327,0.4434],[124.429,0.4514],[124.4123,0.4545],[124.3876,0.4472],[124.3855,0.4417],[124.361,0.4442],[124.3608,0.4314],[124.3596,0.4379],[124.3557,0.4375],[124.3555,0.4531],[124.3466,0.4433],[124.3466,0.449],[124.3416,0.4494],[124.3385,0.4335],[124.3381,0.44],[124.3248,0.4462],[124.3216,0.4264],[124.3134,0.4123],[124.3143,0.4189],[124.3039,0.4273],[124.2824,0.4228],[124.2722,0.4289],[124.2823,0.4091],[124.2838,0.4159],[124.2867,0.4134],[124.2878,0.4064],[124.2437,0.3981],[124.2322,0.3887],[124.2251,0.3951],[124.2207,0.3881],[124.2169,0.3899],[124.2198,0.3827],[124.2119,0.3907],[124.2123,0.3974],[124.206,0.3936],[124.1919,0.3975],[124.1851,0.3925],[124.1578,0.391],[124.1435,0.3948],[124.1128,0.3862],[124.08,0.3873],[124.0735,0.3797],[124.0675,0.3796],[124.065,0.3702],[124.0559,0.3692],[124.0533,0.3606],[124.0455,0.3757],[124.0358,0.3685],[124.0334,0.374],[123.9901,0.3738],[123.9783,0.3685],[123.9781,0.3614],[123.9705,0.3569],[123.9501,0.3573],[123.9457,0.363],[123.9461,0.3551],[123.9401,0.3523],[123.9352,0.358],[123.9255,0.3557],[123.9218,0.3437],[123.9135,0.3458],[123.9162,0.3513],[123.8828,0.348],[123.8719,0.3316],[123.8597,0.328],[123.8382,0.3282],[123.8184,0.3361],[123.8022,0.3305],[123.7975,0.3173],[123.7776,0.3124],[123.7524,0.3199],[123.7449,0.3176],[123.7357,0.3237],[123.719,0.3162],[123.7087,0.3185],[123.6798,0.3032],[123.6764,0.2955],[123.6658,0.3044],[123.6468,0.3057],[123.6346,0.3026],[123.6295,0.2922],[123.6222,0.2935],[123.6125,0.3003],[123.611,0.3093],[123.5898,0.3089],[123.571,0.3209],[123.545,0.3219],[123.4957,0.3066],[123.4766,0.3166],[123.4829,0.3254],[123.48,0.3528],[123.4937,0.3568],[123.4916,0.3657],[123.4979,0.3821],[123.529,0.4075],[123.5376,0.4231],[123.5499,0.433],[123.5474,0.4429],[123.5286,0.4509],[123.5236,0.463],[123.523,0.4904],[123.5463,0.4977],[123.5523,0.5107],[123.5473,0.523],[123.5279,0.5409],[123.5324,0.5731],[123.5374,0.5793],[123.5469,0.5756],[123.566,0.5779],[123.5878,0.5868],[123.6091,0.5619],[123.6315,0.5641],[123.6437,0.5735],[123.6825,0.5627],[123.7096,0.5706],[123.7212,0.5259],[123.7107,0.5036],[123.6918,0.4866],[123.6912,0.4745],[123.6986,0.456],[123.7074,0.4563],[123.7135,0.4667],[123.7274,0.4614],[123.7382,0.4652],[123.75,0.4571],[123.7606,0.4601],[123.767,0.4545],[123.7764,0.4548],[123.7801,0.4462],[123.7917,0.4406],[123.8266,0.4433],[123.8394,0.4547],[123.8601,0.4591],[123.8822,0.4488],[123.8948,0.4508],[123.9105,0.4341],[123.9294,0.4316],[123.9393,0.4411],[123.9476,0.4425],[123.951,0.4559],[123.9567,0.4589],[123.9903,0.4634],[123.9923,0.468],[124.0017,0.4669],[124.0242,0.4769],[124.0235,0.483],[124.0326,0.4873],[124.0329,0.4925],[124.0465,0.4978],[124.0493,0.5117],[124.0629,0.5185],[124.0742,0.5139],[124.1131,0.5273],[124.1158,0.5364],[124.1306,0.5447],[124.1387,0.5582],[124.1606,0.5617],[124.1809,0.5392],[124.1777,0.5259],[124.1946,0.5276],[124.2219,0.5398],[124.274,0.5444],[124.2829,0.5558],[124.298,0.5621],[124.3016,0.5729],[124.3201,0.583],[124.3376,0.6169],[124.345,0.6087],[124.3746,0.5987],[124.3813,0.582],[124.4015,0.5769],[124.418,0.5652],[124.4395,0.5669],[124.438,0.5351],[124.4474,0.5285],[124.4484,0.5212],[124.4596,0.518],[124.4641,0.5109],[124.4691,0.4984],[124.4664,0.4773],[124.4759,0.466]]]]}},{"type":"Feature","properties":{"nama":"Kabupaten Bolaang Mongondow Timur","singkat":"Boltim","kode_bps":"7111","kode_bnpb":"7110","total":12,"y2015":0,"y2016":0,"y2017":1,"y2018":2,"y2019":0,"y2020":0,"y2021":1,"y2022":5,"y2023":3,"y2024":0},"geometry":{"type":"MultiPolygon","coordinates":[[[[124.6576,0.7811],[124.6623,0.773],[124.6592,0.7695],[124.6496,0.7797],[124.6576,0.7811]]],[[[124.685,0.8121],[124.6869,0.8081],[124.6604,0.8056],[124.6641,0.808],[124.685,0.8121]]],[[[124.6994,0.844],[124.6875,0.8341],[124.6896,0.8293],[124.6708,0.8287],[124.6595,0.8087],[124.6392,0.7908],[124.6282,0.773],[124.6237,0.7602],[124.6237,0.7331],[124.6302,0.7245],[124.6223,0.7039],[124.6119,0.6999],[124.5987,0.7067],[124.5948,0.6849],[124.5877,0.683],[124.5819,0.6924],[124.5824,0.6877],[124.5764,0.6857],[124.5798,0.679],[124.5769,0.6714],[124.5668,0.6669],[124.5548,0.6497],[124.5523,0.6351],[124.5439,0.6248],[124.5655,0.6172],[124.569,0.5791],[124.5644,0.5768],[124.5575,0.5908],[124.5399,0.5876],[124.5278,0.5784],[124.5254,0.5633],[124.5207,0.5597],[124.5159,0.5624],[124.4942,0.5475],[124.4978,0.5402],[124.4924,0.5384],[124.4904,0.5272],[124.4993,0.5246],[124.5032,0.5149],[124.5006,0.504],[124.5069,0.4931],[124.5018,0.4901],[124.5085,0.4868],[124.5119,0.4735],[124.5008,0.4731],[124.5017,0.4666],[124.4962,0.4662],[124.4924,0.4703],[124.4991,0.478],[124.4923,0.4799],[124.4898,0.4868],[124.4805,0.4787],[124.4845,0.4766],[124.483,0.4684],[124.4759,0.466],[124.4664,0.4773],[124.4691,0.4984],[124.4641,0.5109],[124.4596,0.518],[124.4484,0.5212],[124.4474,0.5285],[124.438,0.5351],[124.4395,0.5669],[124.418,0.5652],[124.4015,0.5769],[124.3813,0.582],[124.3746,0.5987],[124.345,0.6087],[124.3376,0.6169],[124.3353,0.6257],[124.3422,0.6604],[124.3601,0.6767],[124.3449,0.7253],[124.3535,0.7547],[124.3987,0.7689],[124.417,0.7692],[124.4231,0.7857],[124.4337,0.7925],[124.453,0.7701],[124.4558,0.7366],[124.4637,0.7303],[124.4658,0.7524],[124.472,0.7587],[124.4695,0.7633],[124.4787,0.7687],[124.4812,0.7633],[124.4893,0.7665],[124.4923,0.7892],[124.4879,0.802],[124.4972,0.8124],[124.4971,0.8206],[124.517,0.8257],[124.5257,0.8412],[124.5342,0.8424],[124.5346,0.8472],[124.5486,0.8537],[124.5601,0.8675],[124.5584,0.887],[124.5778,0.9148],[124.5806,0.9348],[124.5871,0.9321],[124.5945,0.9414],[124.613,0.9479],[124.6328,0.9477],[124.6454,0.9567],[124.6511,0.9564],[124.6524,0.9515],[124.647,0.9393],[124.648,0.928],[124.6586,0.9083],[124.6608,0.8902],[124.6709,0.8782],[124.6711,0.8714],[124.6829,0.8726],[124.6867,0.8607],[124.6946,0.8603],[124.6994,0.844]]]]}},{"type":"Feature","properties":{"nama":"Kota Manado","singkat":"Manado","kode_bps":"7171","kode_bnpb":"7171","total":30,"y2015":2,"y2016":4,"y2017":4,"y2018":5,"y2019":2,"y2020":0,"y2021":4,"y2022":5,"y2023":2,"y2024":2},"geometry":{"type":"MultiPolygon","coordinates":[[[[124.8916,1.4584],[124.8852,1.4542],[124.8834,1.4618],[124.8728,1.4656],[124.87,1.451],[124.8612,1.4461],[124.8612,1.4367],[124.8507,1.4401],[124.8258,1.4294],[124.7848,1.446],[124.7843,1.4612],[124.8174,1.4592],[124.8311,1.47],[124.8307,1.4862],[124.8405,1.4988],[124.845,1.5152],[124.8415,1.5269],[124.8237,1.5388],[124.8059,1.5595],[124.8058,1.5762],[124.8206,1.5825],[124.8385,1.5669],[124.8452,1.5644],[124.8555,1.5709],[124.8594,1.5642],[124.8782,1.5753],[124.8964,1.5689],[124.8971,1.5745],[124.9026,1.5754],[124.91,1.5736],[124.911,1.5679],[124.9226,1.5597],[124.9242,1.5654],[124.9281,1.5644],[124.9273,1.5373],[124.9228,1.5283],[124.9336,1.5092],[124.9045,1.4958],[124.9045,1.491],[124.8941,1.4847],[124.8916,1.4584]]],[[[124.7442,1.6335],[124.758,1.6271],[124.7741,1.6284],[124.7818,1.6124],[124.7815,1.5954],[124.7709,1.6044],[124.7636,1.6205],[124.7358,1.6178],[124.7369,1.6274],[124.7442,1.6335]]],[[[124.8009,1.6369],[124.8045,1.6324],[124.8029,1.627],[124.7993,1.63],[124.8009,1.6369]]],[[[124.7025,1.6488],[124.7159,1.6398],[124.716,1.6281],[124.6975,1.6166],[124.6917,1.6179],[124.6821,1.6249],[124.6819,1.6365],[124.6903,1.6469],[124.7025,1.6488]]]]}},{"type":"Feature","properties":{"nama":"Kota Bitung","singkat":"Bitung","kode_bps":"7172","kode_bnpb":"7172","total":13,"y2015":1,"y2016":0,"y2017":4,"y2018":0,"y2019":1,"y2020":3,"y2021":1,"y2022":0,"y2023":1,"y2024":2},"geometry":{"type":"MultiPolygon","coordinates":[[[[125.2925,1.5492],[125.2922,1.5334],[125.2748,1.5045],[125.2826,1.4861],[125.2715,1.4759],[125.2739,1.4656],[125.2607,1.4455],[125.2635,1.4299],[125.2544,1.4073],[125.2502,1.4146],[125.244,1.4152],[125.2412,1.407],[125.2396,1.411],[125.2347,1.4095],[125.234,1.4013],[125.2159,1.3978],[125.2064,1.4049],[125.1945,1.3972],[125.1782,1.3965],[125.1754,1.3907],[125.1689,1.3965],[125.1796,1.4045],[125.1704,1.4065],[125.1826,1.419],[125.186,1.432],[125.1906,1.4283],[125.2404,1.4431],[125.243,1.4679],[125.2642,1.4954],[125.2618,1.4998],[125.2692,1.5052],[125.2717,1.5142],[125.2778,1.5165],[125.2779,1.5269],[125.2925,1.5492]]],[[[125.1078,1.3933],[125.0923,1.4225],[125.0921,1.4472],[125.0789,1.4501],[125.0655,1.4449],[125.0481,1.4526],[125.0307,1.4536],[125.0494,1.4798],[125.0829,1.5123],[125.0835,1.5246],[125.0756,1.527],[125.0717,1.5364],[125.0841,1.5399],[125.1122,1.5607],[125.125,1.558],[125.1374,1.5647],[125.146,1.5768],[125.148,1.5918],[125.1551,1.5957],[125.1556,1.581],[125.1694,1.5663],[125.2034,1.5519],[125.2349,1.5291],[125.2452,1.5147],[125.2415,1.4965],[125.236,1.4926],[125.2413,1.4862],[125.2343,1.4788],[125.2338,1.4665],[125.2143,1.4581],[125.2079,1.4456],[125.1936,1.4411],[125.1957,1.4383],[125.1413,1.4373],[125.1265,1.4283],[125.1176,1.4002],[125.1078,1.3933]]]]}},{"type":"Feature","properties":{"nama":"Kota Tomohon","singkat":"Tomohon","kode_bps":"7173","kode_bnpb":"7173","total":4,"y2015":1,"y2016":0,"y2017":0,"y2018":0,"y2019":0,"y2020":0,"y2021":0,"y2022":1,"y2023":2,"y2024":0},"geometry":{"type":"Polygon","coordinates":[[[124.8255,1.4043],[124.8408,1.4016],[124.8382,1.3812],[124.8609,1.3615],[124.8632,1.3526],[124.8881,1.3582],[124.8929,1.3517],[124.874,1.323],[124.8688,1.3027],[124.8557,1.2944],[124.8592,1.2895],[124.8542,1.2643],[124.8288,1.2538],[124.8141,1.27],[124.8034,1.2718],[124.7955,1.2819],[124.7822,1.2883],[124.7682,1.2897],[124.7571,1.2789],[124.7484,1.2829],[124.7404,1.3136],[124.7437,1.3324],[124.7688,1.3546],[124.7702,1.3679],[124.7776,1.3617],[124.7875,1.3656],[124.7962,1.3567],[124.8029,1.3592],[124.8109,1.3722],[124.8116,1.3973],[124.8255,1.4043]]]}},{"type":"Feature","properties":{"nama":"Kota Kotamobagu","singkat":"Kotamobagu","kode_bps":"7174","kode_bnpb":"7174","total":9,"y2015":0,"y2016":1,"y2017":2,"y2018":0,"y2019":0,"y2020":0,"y2021":1,"y2022":4,"y2023":1,"y2024":0},"geometry":{"type":"Polygon","coordinates":[[[124.3535,0.7547],[124.3449,0.7253],[124.349,0.7086],[124.3284,0.7126],[124.3248,0.704],[124.2937,0.6943],[124.2951,0.6979],[124.2871,0.7042],[124.2715,0.7118],[124.2737,0.7315],[124.2781,0.7314],[124.2745,0.7406],[124.2877,0.75],[124.3093,0.7559],[124.3075,0.7614],[124.3219,0.7697],[124.3446,0.7677],[124.3448,0.7552],[124.3535,0.7547]]]}}]};
+const YEARS = [2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+const PROV2025 = { total: 38, jenis: [["Banjir",30],["Cuaca ekstrem",3],["Tanah longsor",3],["Gempa bumi",1],["Karhutla",1]],
+  dampak: [["Meninggal",4],["Terdampak",53863],["Mengungsi",1410],["Rumah rusak",242]] };
+
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fmt = n => n.toLocaleString("id-ID");
+let mode = "total", year = 2021, selected = null, layer;
+
+const totalClass = v => v >= 26 ? 3 : v >= 15 ? 2 : 1;           // 4–14 | 15–25 | 26–36
+const yearClass  = v => v >= 5 ? 3 : v >= 3 ? 2 : v >= 1 ? 1 : 0; // 0 | 1–2 | 3–4 | ≥5
+const value = p => mode === "total" ? p.total : p["y" + year];
+const cls = p => mode === "total" ? totalClass(p.total) : yearClass(p["y" + year]);
+const clsName = p => mode === "total" ? ["", "Rendah", "Sedang", "Tinggi"][totalClass(p.total)] : null;
+
+const map = L.map("map", { zoomSnap: 0.25, attributionControl: false, scrollWheelZoom: false });
+L.control.scale({ imperial: false, position: "bottomright" }).addTo(map);
+
+function style(f) {
+  const c = cls(f.properties);
+  return { fillColor: css("--c" + c), fillOpacity: 1, color: css("--land-edge"),
+           weight: selected === f.properties.kode_bps ? 2.5 : 0.8 };
+}
+function draw() {
+  if (layer) layer.remove();
+  layer = L.geoJSON(GEO, {
+    style,
+    onEachFeature: (f, l) => {
+      l.bindTooltip(() => `<b>${f.properties.singkat}</b> · ${value(f.properties)} kejadian`, { sticky: true, direction: "top" });
+      l.on("click", () => select(f.properties.kode_bps));
+      l.on("mouseover", () => l.setStyle({ weight: 2.5 }));
+      l.on("mouseout", () => layer.resetStyle(l));
+    }
+  }).addTo(map);
+  legend(); rank(); trend(); detail();
+}
+function legend() {
+  const items = mode === "total"
+    ? [["Rendah (4–14)", 1], ["Sedang (15–25)", 2], ["Tinggi (26–36)", 3]]
+    : [["Tidak ada (0)", 0], ["1–2 kejadian", 1], ["3–4 kejadian", 2], ["≥ 5 kejadian", 3]];
+  document.getElementById("legend").innerHTML = `<b>${mode === "total" ? "Total 2015–2024" : "Tahun " + year}</b>` +
+    items.map(([t, c]) => `<span><i style="background:var(--c${c})"></i>${t}</span>`).join("");
+}
+function rank() {
+  const feats = [...GEO.features].sort((a, b) => value(b.properties) - value(a.properties) || a.properties.singkat.localeCompare(b.properties.singkat));
+  const max = Math.max(1, ...feats.map(f => value(f.properties)));
+  document.getElementById("rankTitle").textContent = mode === "total" ? "Peringkat · total 2015–2024" : "Peringkat · tahun " + year;
+  document.getElementById("rank").innerHTML = feats.map((f, i) => {
+    const p = f.properties, v = value(p);
+    return `<li><button type="button" data-k="${p.kode_bps}" aria-current="${selected === p.kode_bps}">
+      <span class="n">${i + 1}</span><span>${p.singkat}</span><span class="v">${v}</span>
+      <span><span class="bar" style="display:block;width:${(v / max) * 100}%"></span></span></button></li>`;
+  }).join("");
+  document.querySelectorAll(".rank button").forEach(b => b.addEventListener("click", () => select(b.dataset.k)));
+}
+function spark(p) {
+  const w = 300, h = 96, pad = 20, bw = (w - pad) / YEARS.length;
+  const max = Math.max(...YEARS.map(y => p["y" + y]), 1);
+  const bars = YEARS.map((y, i) => {
+    const v = p["y" + y], bh = (v / max) * (h - 34), x = pad + i * bw + 3, yy = h - 16 - bh;
+    const on = mode === "year" && y === year;
+    return `<rect x="${x}" y="${yy}" width="${bw - 6}" height="${Math.max(bh, 1)}" rx="2" fill="${on ? "var(--c3)" : "var(--c2)"}"></rect>
+      <text x="${x + (bw - 6) / 2}" y="${yy - 4}" font-size="10" text-anchor="middle">${v}</text>
+      <text x="${x + (bw - 6) / 2}" y="${h - 3}" font-size="9" text-anchor="middle">${String(y).slice(2)}</text>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="Kejadian per tahun">${bars}</svg>`;
+}
+function detail() {
+  const el = document.getElementById("detail");
+  if (!selected) {
+    const tot = GEO.features.reduce((s, f) => s + f.properties.total, 0);
+    el.innerHTML = `<div class="name">Sulawesi Utara</div><div class="meta">15 kabupaten/kota · klik wilayah di peta untuk rinciannya</div>
+      <div class="kpis"><div class="kpi"><small>2015–2024</small><strong>${tot}</strong></div>
+      <div class="kpi"><small>Puncak</small><strong>2021</strong></div><div class="kpi"><small>2025 (prov.)</small><strong>${PROV2025.total}</strong></div></div>`;
+    return;
+  }
+  const p = GEO.features.find(f => f.properties.kode_bps === selected).properties;
+  const peak = YEARS.reduce((a, y) => p["y" + y] > p["y" + a] ? y : a, YEARS[0]);
+  const zero = YEARS.filter(y => p["y" + y] === 0).length;
+  const c = totalClass(p.total);
+  el.innerHTML = `<div class="name">${p.nama}</div>
+    <div class="meta">Kode BPS ${p.kode_bps} · Kode BNPB ${p.kode_bnpb} · <span class="pill" style="background:var(--c${c})">${["", "Rendah", "Sedang", "Tinggi"][c]}</span></div>
+    <div class="kpis"><div class="kpi"><small>Total</small><strong>${p.total}</strong></div>
+    <div class="kpi"><small>Rata-rata/th</small><strong>${(p.total / 10).toFixed(1).replace(".", ",")}</strong></div>
+    <div class="kpi"><small>Puncak</small><strong>${peak}</strong></div></div>
+    ${spark(p)}<p class="note" style="margin-top:4px">${zero} dari 10 tahun tanpa kejadian tercatat.</p>`;
+}
+function trend() {
+  const sums = YEARS.map(y => GEO.features.reduce((s, f) => s + f.properties["y" + y], 0));
+  const vals = [...sums, PROV2025.total], labels = [...YEARS, 2025];
+  const w = 560, h = 190, l = 30, b = 22, t = 14, max = 50, bw = (w - l - 6) / vals.length;
+  const sy = v => h - b - (v / max) * (h - b - t);
+  const grid = [0, 10, 20, 30, 40, 50].map(g => `<line x1="${l}" x2="${w}" y1="${sy(g)}" y2="${sy(g)}" stroke="var(--line)" stroke-width="1"></line>
+    <text x="${l - 6}" y="${sy(g) + 3}" font-size="10" text-anchor="end">${g}</text>`).join("");
+  const bars = vals.map((v, i) => {
+    const x = l + 4 + i * bw, on = mode === "year" && labels[i] === year, is25 = labels[i] === 2025;
+    return `<rect x="${x}" y="${sy(v)}" width="${bw - 8}" height="${sy(0) - sy(v)}" rx="2"
+      fill="${is25 ? "var(--c1)" : on ? "var(--c3)" : "var(--c2)"}" ${is25 ? 'stroke="var(--c2)" stroke-dasharray="3 2"' : ""}></rect>
+      <text x="${x + (bw - 8) / 2}" y="${sy(v) - 4}" font-size="10" text-anchor="middle">${v}</text>
+      <text x="${x + (bw - 8) / 2}" y="${h - 6}" font-size="10" text-anchor="middle">${labels[i]}</text>`;
+  }).join("");
+  document.getElementById("trend").innerHTML = `<svg viewBox="0 0 ${w} ${h}" width="100%" style="min-width:420px" role="img" aria-label="Tren kejadian bencana per tahun">${grid}${bars}</svg>`;
+}
+function types() {
+  const max = PROV2025.jenis[0][1];
+  document.getElementById("types").innerHTML = PROV2025.jenis.map(([n, v]) =>
+    `<div><span>${n}</span><span><span class="t" style="display:block;width:${(v / max) * 100}%"></span></span><span class="v">${v}</span></div>`).join("");
+  document.getElementById("impact").innerHTML = PROV2025.dampak.map(([n, v]) =>
+    `<div class="kpi"><small>${n}</small><strong>${fmt(v)}</strong></div>`).join("");
+}
+function select(k) {
+  selected = selected === k ? null : k;
+  draw();
+}
+function setMode(m) {
+  mode = m;
+  document.getElementById("btnTotal").setAttribute("aria-pressed", m === "total");
+  document.getElementById("btnYear").setAttribute("aria-pressed", m === "year");
+  draw();
+}
+document.getElementById("btnTotal").addEventListener("click", () => setMode("total"));
+document.getElementById("btnYear").addEventListener("click", () => setMode("year"));
+document.getElementById("year").addEventListener("input", e => {
+  year = +e.target.value; document.getElementById("yearOut").textContent = year;
+  if (mode !== "year") setMode("year"); else draw();
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+draw(); types();
+map.fitBounds(layer.getBounds(), { padding: [12, 12] });
+</script>
